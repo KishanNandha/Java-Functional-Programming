@@ -13,11 +13,20 @@ public class FP03BehaviorParameterization {
 		
 		List<Integer> numbers = Arrays.asList(12, 9, 13, 4, 6, 2, 4, 12, 15);
 		
+		//here we are passing logic of method as a parameter 
+		//here we are passing behavior of method  a parameter
+		//this is known as Behavior Parameterization
+		
+		
 		//filterAndPrint(numbers, x -> x%2==0);
 
 		//filterAndPrint(numbers, x -> x%2!=0);
 		
 		filterAndPrint(numbers, x -> x%3==0);
+		
+		
+		
+		/////////// Example ///////////////////////
 		
 		Function<Integer, Integer> mappingFunction = x -> x*x;
 		

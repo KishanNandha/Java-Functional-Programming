@@ -10,6 +10,10 @@ public class FP02StreamOperations {
 	@SuppressWarnings("unused")
 	public static void main(String[] args) {
 
+		//Operations which returns stream are called intermediate operation
+		//Terminal operation: operations which converts stream to other type are called terminal operation.
+		
+		
 		List<Integer> numbers = Arrays.asList(12, 9, 13, 4, 6, 2, 4, 12, 15);
 		
 		numbers.stream()

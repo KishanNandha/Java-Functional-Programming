@@ -78,10 +78,13 @@ public class FP04CustomClass {
 		Predicate<Course> reviewScoreLessThan90Predicate 
 			= course -> course.getReviewScore() < 90;
 
+		//this returns boolean. do all the elements match this predicate? this will return false as we have course letss than 95%
 		System.out.println(courses.stream().allMatch(reviewScoreGreaterThan95Predicate));
 		
+		//this return true if nne of the course matches predicate
 		System.out.println(courses.stream().noneMatch(reviewScoreLessThan90Predicate));
 		
+		//it will return true if any of the element matches predicate
 		System.out.println(courses.stream().anyMatch(reviewScoreLessThan90Predicate));
 		
 		System.out.println(courses.stream().anyMatch(reviewScoreGreaterThan95Predicate));
@@ -104,7 +107,7 @@ public class FP04CustomClass {
 				.collect(Collectors.toList()));
 		//[Microservices:25000:96, API:22000:97, AWS:21000:92, Azure:21000:99, Spring:20000:98, Docker:20000:92, Kubernetes:20000:91, Spring Boot:18000:95, FullStack:14000:91]
 		
-		
+		//comparing with multiple fields
 		Comparator<Course> comparingByNoOfStudentsAndNoOfReviews 
 				= Comparator.comparingInt(Course::getNoOfStudents)
 							.thenComparingInt(Course::getReviewScore)
@@ -116,6 +119,7 @@ public class FP04CustomClass {
 				.collect(Collectors.toList()));
 		//[Microservices:25000:96, API:22000:97, Azure:21000:99, AWS:21000:92, Spring:20000:98, Docker:20000:92, Kubernetes:20000:91, Spring Boot:18000:95, FullStack:14000:91]
 
+		//just like database limit
 		System.out.println(
 				courses.stream()
 				.sorted(comparingByNoOfStudentsAndNoOfReviews)
@@ -130,7 +134,7 @@ public class FP04CustomClass {
 				.collect(Collectors.toList()));
 		//[AWS:21000:92, Spring:20000:98, Docker:20000:92, Kubernetes:20000:91, Spring Boot:18000:95, FullStack:14000:91]
 
-
+		//skipping hte results from top
 		System.out.println(
 				courses.stream()
 				.sorted(comparingByNoOfStudentsAndNoOfReviews)
@@ -155,11 +159,13 @@ public class FP04CustomClass {
 				     .collect(Collectors.toList()));
 		//[FullStack:14000:91, AWS:21000:92, Azure:21000:99, Docker:20000:92, Kubernetes:20000:91]
 
+		//max return last element after sorting from this comparator
 		System.out.println(
 				courses.stream()
 				.max(comparingByNoOfStudentsAndNoOfReviews));
 		//Optional[FullStack:14000:91]
 
+		//min will print first element after sorting from this comparator
 		System.out.println(
 				courses.stream()
 				.min(comparingByNoOfStudentsAndNoOfReviews)
@@ -178,6 +184,7 @@ public class FP04CustomClass {
 		//Optional.empty
 		//Kubernetes:20000:91
 		
+		//will print first element after predicate is true
 		System.out.println(
 				courses.stream()
 				.filter(reviewScoreLessThan90Predicate)
@@ -191,12 +198,14 @@ public class FP04CustomClass {
 				.findFirst()
 					);//Optional[Spring:20000:98]
 
+		//wil return any of the element which will be true for predicate (random)
 		System.out.println(
 				courses.stream()
 				.filter(reviewScoreGreaterThan95Predicate)
 				.findAny()
 					);//Optional[Spring:20000:98]
 
+		
 		System.out.println(
 				courses.stream()
 				.filter(reviewScoreGreaterThan95Predicate)
@@ -221,6 +230,7 @@ public class FP04CustomClass {
 				.mapToInt(Course::getNoOfStudents)
 				.max());//OptionalInt[25000]
 		
+		//this will return map
 		System.out.println(
 				courses.stream()
 				.collect(Collectors.groupingBy(Course::getCategory)));

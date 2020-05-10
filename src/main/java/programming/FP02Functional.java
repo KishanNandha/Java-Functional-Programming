@@ -56,6 +56,10 @@ public class FP02Functional {
 		//Stream of number -> One result value
 		  //Combine them into one result => One Value
 		  // 0 and FP02Functional::sum
+		
+		//reduce take first arge: starting point or initial value/ identity value
+		//2nd is accumulative function:function for combining values
+		
 		return numbers.stream()
 				.parallel()
 		  //.reduce(0, FP02Functional::sum);	

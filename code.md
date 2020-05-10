@@ -26,6 +26,13 @@ numbers.stream().map(x -> x*x*x).reduce(0, Integer::sum)
 numbers.stream().filter(x -> x%2==1).reduce(0, Integer::sum)
 numbers.stream().filter(x -> x%2==0).reduce(0, Integer::sum)
 
+//distinct and sorted
+//distinct : remove duplicates
+
+//sort numbers : ascending order
+//sort string : alphabetical order
+
+
 numbers.stream().distinct().forEach(System.out::println)
 
 numbers.stream().sorted().forEach(System.out::println)
@@ -37,7 +44,9 @@ List<String> courses = List.of("Spring", "Spring Boot", "API" , "Microservices",
 courses.stream().sorted().forEach(System.out::println)
 
 courses.stream().sorted(Comparator.naturalOrder()).forEach(System.out::println)
+//reverse order
 courses.stream().sorted(Comparator.reverseOrder()).forEach(System.out::println)
+//custom sorting
 courses.stream().sorted(Comparator.comparing(str -> str.length())).forEach(System.out::println)
 
 courses.stream().map(x -> x.length()).collect(Collectors.toList())
@@ -51,10 +60,13 @@ Consumer<String> consumer = (str) -> { System.out.println(str);System.out.printl
 List<Integer> numbers = List.of(12, 9, 13, 4, 6, 2, 4, 12, 15);
 numbers.stream()
 
+
+
 Stream.of(12, 9, 13, 4, 6, 2, 4, 12, 15).count()
 Stream.of(12, 9, 13, 4, 6, 2, 4, 12, 15).reduce(0, Integer::sum)
 Stream.of(12, 9, 13, 4, 6, 2, 4, 12, 15)
 
+// way to create premitive stream : using arrays
 int[] numberArray = {12, 9, 13, 4, 6, 2, 4, 12, 15};
 Arrays.stream(numberArray)
 Arrays.stream(numberArray).sum()
@@ -62,14 +74,21 @@ Arrays.stream(numberArray).average()
 Arrays.stream(numberArray).min()
 Arrays.stream(numberArray).max()
 
+
+//used to create int type stream
+// from 1 to 9 // it excludes last number
 IntStream.range(1,10)
+//sum of 1 to 9
 IntStream.range(1,10).sum()
+//this will  include last number
 IntStream.rangeClosed(1,10).sum()
 
 IntStream.iterate(1, e -> e + 2).limit(10).sum()
+//peek allows us to see values used in debugging
 IntStream.iterate(1, e -> e + 2).limit(10).peek(System.out::println).sum()
 IntStream.iterate(2, e -> e + 2).limit(10).peek(System.out::println).sum()
 IntStream.iterate(2, e -> e * 2).limit(10).peek(System.out::println).sum()
+//we cant collect premitive stream directly we have to boxed it
 IntStream.iterate(2, e -> e * 2).limit(10).boxed().collect(Collectors.toList())
 
 Integer.MAX_VALUE
@@ -92,6 +111,7 @@ courses.stream().map(course -> course.split("")).collect(Collectors.toList())
 
 courses.stream().map(course -> course.split(""))
 
+//use flat map when we have stream of streams
 courses.stream().map(course -> course.split("")).flatMap(Arrays::stream).collect(Collectors.toList())
 
 courses.stream().map(course -> course.split("")).flatMap(Arrays::stream).distinct().collect(Collectors.toList())
@@ -123,7 +143,9 @@ courses.replaceAll( str -> str.toUpperCase()) //Error
 
 List<String> modifyableCourses = new ArrayList(courses);
 
+//modify existing list
 modifyableCourses.replaceAll(str -> str.toUpperCase())
+//best ! remove elements in existing collection
 modifyableCourses.removeIf(course -> course.length()<6)
 
 Runnable runnable3 = () -> IntStream.range(0, 10000).forEach(i -> System.out.println(Thread.currentThread().getId() + ":" + i))

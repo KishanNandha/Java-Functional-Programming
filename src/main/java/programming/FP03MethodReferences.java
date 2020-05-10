@@ -23,6 +23,8 @@ public class FP03MethodReferences {
 		 .forEach(FP03MethodReferences::print);
 		
 		Supplier<String> supplier = String::new;
+		
+		String newstring = supplier.get();
 
 	}
 }
